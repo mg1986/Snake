@@ -28,23 +28,24 @@ public class Scoreboard extends JPanel {
 
     public Scoreboard() {
 
+        setBackground(Color.BLACK);
+        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(24, 131, 215)));
+        setPreferredSize(new Dimension(boardWidth, boardHeight));
+        setMaximumSize(getPreferredSize());
+
         try {
             appleIcon = ImageIO.read(new File("img/apple.png"));
         } catch (IOException ex) {
             System.out.println("No Apple Icon");
         }
 
-        JLabel picLabel = new JLabel(new ImageIcon(appleIcon));
-        add(picLabel);
+        JLabel appleIconImage = new JLabel(new ImageIcon(appleIcon));
+        add(appleIconImage);
         score  = new JLabel(" x 000", SwingConstants.RIGHT);
         score.setFont(new Font("Century Gothic", score.getFont().getStyle(), 25));
         score.setForeground(Color.WHITE);
-        score.setBackground(Color.BLACK);
         add(score);
-        setBackground(Color.BLACK);
-        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(24, 131, 215)));
-        setPreferredSize(new Dimension(boardWidth, boardHeight));
-        setMaximumSize(getPreferredSize());
+
         setVisible(true);
     }
 }

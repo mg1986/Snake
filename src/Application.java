@@ -16,7 +16,7 @@ public class Application {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public static void startGame() {
+    private static void startGame() {
         JFrame jFrame = new JFrame("Snake");
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(300, 475);

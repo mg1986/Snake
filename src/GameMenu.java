@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 
 public class GameMenu extends JPanel implements KeyListener {
 
-    public final String MAIN_MENU = "MAIN_MENU";
-    public final String CONTROLS_MENU = "CONTROL_MENU";
-    public final String RESTART_GAME_MENU = "RESTART_GAME_MENU";
+    private final String MAIN_MENU = "MAIN_MENU";
+    private final String CONTROLS_MENU = "CONTROL_MENU";
+    private final String RESTART_GAME_MENU = "RESTART_GAME_MENU";
     private static final int menuWidth = 300;
     private static final int menuHeight = 475;
     private String currentMenu;
@@ -79,7 +79,6 @@ public class GameMenu extends JPanel implements KeyListener {
 
         JLabel jLabel = new JLabel(message);
         jLabel.setForeground(Color.WHITE);
-        jLabel.setBackground(Color.BLACK);
         jLabel.setFont(new Font("Century Gothic", jLabel.getFont().getStyle(), fontSize));
         jLabel.setAlignmentX( Component.CENTER_ALIGNMENT );
         jPanel.add(jLabel);

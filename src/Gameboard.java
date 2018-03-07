@@ -1,13 +1,10 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.security.SecureRandom;
@@ -24,21 +21,19 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
-    private static final int boardWidth = 300;
+    private static final int boardWidth = 303;
     private static final int boardHeight = 400;
     private final int moveInterval = 10;
     private Snake snake;
     private ArrayList<SnakeSegment> snakeBody;
     private Apple apple;
     private int gameSpeed;
-    private final int gameSpeedIncrementValue = 3;
     private ArrayList<Integer> xPositions;
     private ArrayList<Integer> yPositions;
     private SecureRandom secureRandom;
     private Scoreboard scoreboard;
     private GameMenu gameMenu;
     private Timer timer;
-    private JLabel jLabel;
 
     public Gameboard () {}
 
@@ -55,10 +50,10 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         setVisible(true);
         scoreboard = inputScoreboard;
 
-        setPreferredSize(new Dimension(303, boardHeight ));
+        setPreferredSize(new Dimension(boardWidth, boardHeight));
         setMaximumSize(getPreferredSize());
 
-        snake = new Snake(160, 260);
+        snake = new Snake(150, 200);
         snakeBody = snake.snakeBody;
 
         apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
@@ -103,13 +98,9 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
                 break;
             case KeyEvent.VK_P:
                 if (!gamePaused) {
-                    addJLabel ("Paused", 25);
-                    timer.stop();
-                    gamePaused = true;
-                } else if (gamePaused) {
-                    remove(jLabel);
-                    timer.start();
-                    gamePaused = false;
+                    pauseGame();
+                } else {
+                    unpauseGame();
                 }
                 break;
             case KeyEvent.VK_Q:
@@ -214,24 +205,22 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         boolean gameOver = false;
 
         if (outOfBounds || selfIntersection) {
+
             gameMenu.createRestartGameMenu(this);
             gameMenu.requestFocus();
             gameOver = true;
 
         } else if (appleCollision) {
 
-            relocateApple ();
-
-            apple.incrementAppleCount();
-            scoreboard.score.setText(" x " + apple.getFormattedAppleCount());
-            scoreboard.repaint();
-
             if (apple.getAppleCount() <= 25) {
                 snake.addSegment(2);
-                if (gameSpeed > 50) gameSpeed = gameSpeed - gameSpeedIncrementValue;
+                if (gameSpeed > 50) gameSpeed = gameSpeed - 3;
             } else {
                 snake.addSegment(1);
             }
+
+            relocateApple();
+            scoreboard.score.setText(" x " + apple.getFormattedAppleCount());
 
             timer.stop();
             timer = new Timer(gameSpeed, this);
@@ -279,15 +268,19 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         } else {
             relocateApple();
         }
+
+        apple.incrementAppleCount();
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    public void addJLabel (String message, int fontSize) {
-        jLabel = new JLabel(message, JLabel.CENTER);
-        jLabel.setForeground(Color.WHITE);
-        jLabel.setBackground(Color.BLACK);
-        jLabel.setFont(new Font("Century Gothic", jLabel.getFont().getStyle(), fontSize));
-        jLabel.setAlignmentX( Component.CENTER_ALIGNMENT );
-        add(jLabel);
+    private void pauseGame() {
+        gameMenu.addJLabel (this,"Paused", 25);
+        timer.stop();
+        gamePaused = true;
+    }
+
+    private void unpauseGame() {
+        removeAll();
+        timer.start();
+        gamePaused = false;
     }
 }
