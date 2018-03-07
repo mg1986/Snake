@@ -1,8 +1,15 @@
 import java.awt.Color;
 
+/**
+ * Author: Matthew Gray
+ * Last Modified: 3/7/2018
+ * Copyright (C) 2018 Matthew Gray
+ * Square class -
+ */
+
 public class Square {
 
-    public static final int segmentSize = 10;
+    public static final int segmentSize = 9;
     public int currentX;
     public int currentY;
     public Color segmentColor;

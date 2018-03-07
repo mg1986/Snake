@@ -1,6 +1,13 @@
 import java.awt.Color;;
 import java.util.ArrayList;
 
+/**
+ * Author: Matthew Gray
+ * Last Modified: 3/7/2018
+ * Copyright (C) 2018 Matthew Gray
+ * Snake class -
+ */
+
 public class Snake {
 
     public ArrayList<SnakeSegment> snakeBody;
@@ -45,26 +52,29 @@ public class Snake {
         }
     }
 
-    public void addSegment() {
+    public void addSegment(int numSegmentsToAdd) {
         int snakeSize = snakeBody.size();
         if (snakeSize > 0) {
-            SnakeSegment lastSegment = snakeBody.get(snakeSize - 1);
-            int x = lastSegment.getCurrentX();
-            int y = lastSegment.getCurrentY();
 
-            String segmentDirection = lastSegment.getDirection();
-            if (segmentDirection.equals("RIGHT")) {
-                x = x - 9;
-            } else if (segmentDirection.equals("LEFT")) {
-                x = x + 9;
-            } else if (segmentDirection.equals("UP")) {
-                y = y - 9;
-            } else if (segmentDirection.equals("DOWN")) {
-                y = y + 9;
+            for (int counter = 1; counter <= numSegmentsToAdd; counter++) {
+                SnakeSegment lastSegment = snakeBody.get(snakeSize - 1);
+                int x = lastSegment.getCurrentX();
+                int y = lastSegment.getCurrentY();
+
+                String segmentDirection = lastSegment.getDirection();
+                if (segmentDirection.equals("RIGHT")) {
+                    x = x - 9;
+                } else if (segmentDirection.equals("LEFT")) {
+                    x = x + 9;
+                } else if (segmentDirection.equals("UP")) {
+                    y = y - 9;
+                } else if (segmentDirection.equals("DOWN")) {
+                    y = y + 9;
+                }
+
+                SnakeSegment newSegment = new SnakeSegment(x, y, Color.GREEN);
+                snakeBody.add(newSegment);
             }
-
-            SnakeSegment newSegment = new SnakeSegment(x, y, Color.GREEN);
-            snakeBody.add(newSegment);
         }
     }
 }
