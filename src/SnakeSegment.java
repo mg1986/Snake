@@ -21,7 +21,9 @@ public class SnakeSegment extends Square {
     public BufferedImage snakeHeadUp;
     public BufferedImage snakeHeadDown;
 
+    //------------------------------------------------------------------------------------------------------------------
     public SnakeSegment () {}
+
     //------------------------------------------------------------------------------------------------------------------
     public SnakeSegment (int segmentX, int segmentY, Color color) {
        this.currentX = segmentX;
@@ -34,26 +36,26 @@ public class SnakeSegment extends Square {
             snakeHeadUp = ImageIO.read(new File("img/snake_head_up.png"));
             snakeHeadDown = ImageIO.read(new File("img/snake_head_down.png"));
         } catch (IOException ex) {
-            System.out.println("No snake head icons");
+            System.out.println(ex);
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    int getPreviousX() { return this.previousX; }
+    public int getPreviousX() { return this.previousX; }
 
     //------------------------------------------------------------------------------------------------------------------
-    void setPreviousX(int x) { this.previousX = x; }
+    public void setPreviousX(int x) { this.previousX = x; }
 
     //------------------------------------------------------------------------------------------------------------------
-    int getPreviousY() { return this.previousY; }
+    public int getPreviousY() { return this.previousY; }
 
     //------------------------------------------------------------------------------------------------------------------
-    void setPreviousY(int y) { this.previousY = y; }
+    public void setPreviousY(int y) { this.previousY = y; }
 
     //------------------------------------------------------------------------------------------------------------------
-    String getDirection() { return this.segmentDirection; }
+    public String getDirection() { return this.segmentDirection; }
 
     //------------------------------------------------------------------------------------------------------------------
-    void setDirection(String direction) { this.segmentDirection = direction; }
+    public void setDirection(String direction) { this.segmentDirection = direction; }
 
 }

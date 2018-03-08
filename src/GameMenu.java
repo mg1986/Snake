@@ -26,6 +26,7 @@ public class GameMenu extends JPanel implements KeyListener {
     private static final int menuHeight = 475;
     private String currentMenu;
 
+    //------------------------------------------------------------------------------------------------------------------
     public GameMenu () {
 
         setBackground(Color.BLACK);
@@ -84,7 +85,8 @@ public class GameMenu extends JPanel implements KeyListener {
         jPanel.add(jLabel);
     }
 
-    public void  createMainMenu() {
+    //------------------------------------------------------------------------------------------------------------------
+    private void  createMainMenu() {
         removeAll();
         JPanel mainMenu = new JPanel();
         mainMenu.setPreferredSize(new Dimension(menuWidth, menuHeight));
@@ -103,7 +105,8 @@ public class GameMenu extends JPanel implements KeyListener {
         repaint();
     }
 
-    public void createControlsMenu() {
+    //------------------------------------------------------------------------------------------------------------------
+    private void createControlsMenu() {
         removeAll();
         JPanel controlsMenu = new JPanel();
         controlsMenu.setPreferredSize(new Dimension(menuWidth, menuHeight));
@@ -127,6 +130,7 @@ public class GameMenu extends JPanel implements KeyListener {
         repaint();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void createRestartGameMenu(Gameboard gameboard) {
 
         remove(gameboard);
@@ -146,6 +150,7 @@ public class GameMenu extends JPanel implements KeyListener {
         repaint();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void startGame() {
 
         removeAll();

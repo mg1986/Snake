@@ -36,7 +36,7 @@ public class Scoreboard extends JPanel {
         try {
             appleIcon = ImageIO.read(new File("img/apple.png"));
         } catch (IOException ex) {
-            System.out.println("No Apple Icon");
+            System.out.println(ex);
         }
 
         JLabel appleIconImage = new JLabel(new ImageIcon(appleIcon));

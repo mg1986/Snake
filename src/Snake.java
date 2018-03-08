@@ -12,12 +12,17 @@ public class Snake {
 
     public ArrayList<SnakeSegment> snakeBody;
 
+    //------------------------------------------------------------------------------------------------------------------
+    public Snake () {}
+
+    //------------------------------------------------------------------------------------------------------------------
     public Snake (int headX, int headY) {
         snakeBody = new ArrayList<>();
         SnakeSegment head = new SnakeSegment(headX, headY, Color.GREEN);
         snakeBody.add(head);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void incrementSnake(int headX, int headY) {
 
         for (int idx = 0; idx < snakeBody.size(); idx++) {
@@ -52,6 +57,7 @@ public class Snake {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void addSegment(int numSegmentsToAdd) {
         int snakeSize = snakeBody.size();
         if (snakeSize > 0) {

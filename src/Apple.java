@@ -1,5 +1,4 @@
 import javax.imageio.ImageIO;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +12,13 @@ import java.io.IOException;
 
 public class Apple extends Square {
 
-    public final Color appleColor = Color.RED;
-    public int appleCount = 0;
-    private final int APPLE_COUNTER_INCREMENT_VALUE = 1;
+    private int appleCount;
     public BufferedImage appleImage;
 
+    //------------------------------------------------------------------------------------------------------------------
+    public Apple () {}
 
+    //------------------------------------------------------------------------------------------------------------------
     public Apple (int segmentX, int segmentY) {
         this.currentX = segmentX;
         this.currentY = segmentY;
@@ -26,18 +26,18 @@ public class Apple extends Square {
         try {
             appleImage = ImageIO.read(new File("img/apple_small.png"));
         } catch (IOException ex) {
-            System.out.println("No Apple Icon");
+            System.out.println(ex);
         }
     }
-
-    //------------------------------------------------------------------------------------------------------------------
-    public String getFormattedAppleCount() { return String.format ("%03d", appleCount); }
 
     //------------------------------------------------------------------------------------------------------------------
     public int getAppleCount() { return this.appleCount;}
 
     //------------------------------------------------------------------------------------------------------------------
+    public String getFormattedAppleCount() { return String.format ("%03d", appleCount); }
+
+    //------------------------------------------------------------------------------------------------------------------
     public void incrementAppleCount() {
-        this.appleCount = this.appleCount + APPLE_COUNTER_INCREMENT_VALUE;
+        this.appleCount = this.appleCount + 1;
     }
 }

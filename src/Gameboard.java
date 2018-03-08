@@ -35,8 +35,10 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
     private GameMenu gameMenu;
     private Timer timer;
 
+    //------------------------------------------------------------------------------------------------------------------
     public Gameboard () {}
 
+    //------------------------------------------------------------------------------------------------------------------
     public Gameboard (GameMenu inputGameMenu, Scoreboard inputScoreboard) {
 
         secureRandom = new SecureRandom();
@@ -58,7 +60,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
         apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
 
-        gameSpeed = 125;
+        gameSpeed = 150;
 
         gameMenu = inputGameMenu;
 
@@ -212,11 +214,20 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
         } else if (appleCollision) {
 
-            if (apple.getAppleCount() <= 25) {
+            if (apple.getAppleCount() <= 10) {
                 snake.addSegment(2);
                 if (gameSpeed > 50) gameSpeed = gameSpeed - 3;
-            } else {
+            } else if (apple.getAppleCount() > 10 && apple.getAppleCount() <= 40) {
+                snake.addSegment(2);
+                if (gameSpeed > 50) gameSpeed = gameSpeed - 2;
+            } else if (apple.getAppleCount() > 40 && apple.getAppleCount() <= 50) {
+                snake.addSegment(2);
+                if (gameSpeed > 50) gameSpeed = gameSpeed - 1;
+            } else if (apple.getAppleCount() > 50) {
                 snake.addSegment(1);
+                if (gameSpeed > 45 && apple.getAppleCount() <= 100 &&apple.getAppleCount() % 10 == 0) {
+                    gameSpeed = gameSpeed - 1;
+                }
             }
 
             relocateApple();
@@ -272,12 +283,14 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         apple.incrementAppleCount();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     private void pauseGame() {
         gameMenu.addJLabel (this,"Paused", 25);
         timer.stop();
         gamePaused = true;
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     private void unpauseGame() {
         removeAll();
         timer.start();
