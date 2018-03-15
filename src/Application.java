@@ -19,12 +19,12 @@ public class Application {
     private static void startGame() {
         JFrame jFrame = new JFrame("Snake");
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setSize(300, 475);
+        jFrame.setSize(480, 715);
         jFrame.setLocationRelativeTo(null);
         jFrame.setResizable(false);
 
         GameMenu gameMenu = new GameMenu();
-        gameMenu.setBounds(0, 0, 300, 475);
+        gameMenu.setBounds(0, 0, 480, 715);
 
         jFrame.add(gameMenu);
         jFrame.pack();

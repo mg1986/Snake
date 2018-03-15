@@ -23,7 +23,7 @@ public class Scoreboard extends JPanel {
     public  JLabel score;
     private BufferedImage appleIcon;
 
-    private static final int boardWidth = 303;
+    private static final int boardWidth = 603;
     private static final int boardHeight = 75;
 
     public Scoreboard() {
@@ -42,7 +42,7 @@ public class Scoreboard extends JPanel {
         JLabel appleIconImage = new JLabel(new ImageIcon(appleIcon));
         add(appleIconImage);
         score  = new JLabel(" x 000", SwingConstants.RIGHT);
-        score.setFont(new Font("Century Gothic", score.getFont().getStyle(), 25));
+        score.setFont(new Font("Century Gothic", score.getFont().getStyle(), 35));
         score.setForeground(Color.WHITE);
         add(score);
 

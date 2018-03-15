@@ -21,9 +21,9 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
-    private static final int boardWidth = 303;
-    private static final int boardHeight = 400;
-    private final int moveInterval = 10;
+    private static final int boardWidth = 483;
+    private static final int boardHeight = 640;
+    private final int moveInterval = 16;
     private Snake snake;
     private ArrayList<SnakeSegment> snakeBody;
     private Apple apple;
@@ -55,7 +55,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setMaximumSize(getPreferredSize());
 
-        snake = new Snake(150, 200);
+        snake = new Snake(160, 160);
         snakeBody = snake.snakeBody;
 
         apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
@@ -81,22 +81,21 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent  keyEvent) {
 
         int keyEventCode = keyEvent.getKeyCode();
-        boolean snakeBodySizeEqualsOne = (snakeBody.size() == 1);
         SnakeSegment head = snake.snakeBody.get(0);
         String direction = head.getDirection();
 
         switch(keyEventCode){
             case KeyEvent.VK_RIGHT:
-                if (!direction.equals("LEFT") || snakeBodySizeEqualsOne) head.setDirection("RIGHT");
+                if (!direction.equals("LEFT") && !gamePaused) head.setDirection("RIGHT");
                 break;
             case KeyEvent.VK_LEFT:
-                if (!direction.equals("RIGHT") || snakeBodySizeEqualsOne) head.setDirection("LEFT");
+                if (!direction.equals("RIGHT") && !gamePaused) head.setDirection("LEFT");
                 break;
             case KeyEvent.VK_UP:
-                if (!direction.equals("DOWN") || snakeBodySizeEqualsOne) head.setDirection("UP");
+                if (!direction.equals("DOWN") && !gamePaused) head.setDirection("UP");
                 break;
             case KeyEvent.VK_DOWN:
-                if (!direction.equals("UP") || snakeBodySizeEqualsOne) head.setDirection("DOWN");
+                if (!direction.equals("UP") && !gamePaused) head.setDirection("DOWN");
                 break;
             case KeyEvent.VK_P:
                 if (!gamePaused) {
@@ -164,9 +163,9 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
             int x = snakeSegment.getCurrentX();
             int y = snakeSegment.getCurrentY();
             int segmentSize = SnakeSegment.segmentSize;
+            String direction = snakeSegment.getDirection();
 
             if (idx == 0) {
-                String direction = snakeSegment.getDirection();
                 switch(direction){
                     case "RIGHT":
                         g.drawImage(snakeSegment.snakeHeadRight, x, y, this);
@@ -182,8 +181,56 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
                         break;
                 }
             } else {
+
+                int slitherGap = 1;
                 g.setColor(snakeSegment.getColor());
-                g.drawRect(x, y, segmentSize, segmentSize);
+
+                if (direction.equals("RIGHT") || direction.equals("LEFT")) {
+                    if (y == 0) {
+                        if ((x / 10) % 4 == 0 || (x / 10) % 2 == 0) {
+                            g.drawRect(x, y + slitherGap, segmentSize, segmentSize);
+                        } else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    } else if (y == 624) {
+                        if ((x / 10) % 4 == 0 || (x / 10) % 2 == 0) {
+                            g.drawRect(x, y - slitherGap, segmentSize, segmentSize);
+                        } else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    } else {
+                        if ((x / 10) % 4 == 0) {
+                            g.drawRect(x, y + slitherGap, segmentSize, segmentSize);
+                        } else if ((x / 10) % 2 == 0) {
+                            g.drawRect(x, y - slitherGap, segmentSize, segmentSize);
+                        } else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    }
+                } else if (direction.equals("UP") || direction.equals("DOWN")) {
+                    System.out.println(x + " - " + y);
+                    if (x == 0) {
+                        if ((y / 10) % 4 == 0 || (y / 10) % 2 == 0) {
+                            g.drawRect(x + slitherGap, y, segmentSize, segmentSize);
+                        }  else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    } else if (x == 464) {
+                        if ((y / 10) % 4 == 0 || (y / 10) % 2 == 0) {
+                            g.drawRect(x - slitherGap, y, segmentSize, segmentSize);
+                        }  else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    } else {
+                        if ((y / 10) % 4 == 0) {
+                            g.drawRect(x + slitherGap, y, segmentSize, segmentSize);
+                        } else if ((y / 10) % 2 == 0) {
+                            g.drawRect(x - slitherGap, y, segmentSize, segmentSize);
+                        } else {
+                            g.drawRect(x, y, segmentSize, segmentSize);
+                        }
+                    }
+                }
             }
         }
     }
@@ -285,7 +332,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
     //------------------------------------------------------------------------------------------------------------------
     private void pauseGame() {
-        gameMenu.addJLabel (this,"Paused", 25);
+        gameMenu.addJLabel (this,"Paused", 35);
         timer.stop();
         gamePaused = true;
     }

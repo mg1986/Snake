@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class Square {
 
-    public static final int segmentSize = 9;
+    public static final int segmentSize = 15;
     public int currentX;
     public int currentY;
     public Color segmentColor;
