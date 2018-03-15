@@ -183,48 +183,51 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
             } else {
 
                 int slitherGap = 1;
+                int modulusValue1 = 4;
+                int modulusValue2 = 2;
+                int divideValue = 10;
                 g.setColor(snakeSegment.getColor());
 
                 if (direction.equals("RIGHT") || direction.equals("LEFT")) {
                     if (y == 0) {
-                        if ((x / 10) % 4 == 0 || (x / 10) % 2 == 0) {
+                        if ((x / divideValue) % modulusValue1 == 0 || (x / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x, y + slitherGap, segmentSize, segmentSize);
                         } else {
                             g.drawRect(x, y, segmentSize, segmentSize);
                         }
                     } else if (y == 624) {
-                        if ((x / 10) % 4 == 0 || (x / 10) % 2 == 0) {
+                        if ((x / divideValue) % modulusValue1 == 0 || (x / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x, y - slitherGap, segmentSize, segmentSize);
                         } else {
                             g.drawRect(x, y, segmentSize, segmentSize);
                         }
                     } else {
-                        if ((x / 10) % 4 == 0) {
+                        if ((x / divideValue) % modulusValue1 == 0) {
                             g.drawRect(x, y + slitherGap, segmentSize, segmentSize);
-                        } else if ((x / 10) % 2 == 0) {
+                        } else if ((x / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x, y - slitherGap, segmentSize, segmentSize);
                         } else {
                             g.drawRect(x, y, segmentSize, segmentSize);
                         }
                     }
                 } else if (direction.equals("UP") || direction.equals("DOWN")) {
-                    System.out.println(x + " - " + y);
+
                     if (x == 0) {
-                        if ((y / 10) % 4 == 0 || (y / 10) % 2 == 0) {
+                        if ((y / divideValue) % modulusValue1 == 0 || (y / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x + slitherGap, y, segmentSize, segmentSize);
                         }  else {
                             g.drawRect(x, y, segmentSize, segmentSize);
                         }
                     } else if (x == 464) {
-                        if ((y / 10) % 4 == 0 || (y / 10) % 2 == 0) {
+                        if ((y / divideValue) % modulusValue1 == 0 || (y / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x - slitherGap, y, segmentSize, segmentSize);
                         }  else {
                             g.drawRect(x, y, segmentSize, segmentSize);
                         }
                     } else {
-                        if ((y / 10) % 4 == 0) {
+                        if ((y / divideValue) % modulusValue1 == 0) {
                             g.drawRect(x + slitherGap, y, segmentSize, segmentSize);
-                        } else if ((y / 10) % 2 == 0) {
+                        } else if ((y / divideValue) % modulusValue2 == 0) {
                             g.drawRect(x - slitherGap, y, segmentSize, segmentSize);
                         } else {
                             g.drawRect(x, y, segmentSize, segmentSize);
