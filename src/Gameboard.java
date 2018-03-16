@@ -21,7 +21,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
-    private static final int boardWidth = 483;
+    private static final int boardWidth = 480;
     private static final int boardHeight = 640;
     private final int moveInterval = 16;
     private Snake snake;
@@ -55,7 +55,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setMaximumSize(getPreferredSize());
 
-        snake = new Snake(160, 160);
+        snake = new Snake(boardWidth/2, boardHeight/2);
         snakeBody = snake.snakeBody;
 
         apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
