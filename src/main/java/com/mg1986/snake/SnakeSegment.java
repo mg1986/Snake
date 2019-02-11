@@ -1,9 +1,8 @@
 package com.mg1986.snake;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -33,10 +32,10 @@ public class SnakeSegment extends Square {
        this.segmentColor = color;
        this.segmentDirection = "UP";
         try {
-            snakeHeadRight = ImageIO.read(new File("img" + File.separator + "snake_head_right.png"));
-            snakeHeadLeft = ImageIO.read(new File("img" + File.separator + "snake_head_left.png"));
-            snakeHeadUp = ImageIO.read(new File("img" + File.separator + "snake_head_up.png"));
-            snakeHeadDown = ImageIO.read(new File("img" + File.separator + "snake_head_down.png"));
+            snakeHeadRight = ImageIO.read(SnakeSegment.class.getResourceAsStream("/img/snake_head_right.png"));
+            snakeHeadLeft = ImageIO.read(SnakeSegment.class.getResourceAsStream("/img/snake_head_left.png"));
+            snakeHeadUp = ImageIO.read(SnakeSegment.class.getResourceAsStream("/img/snake_head_up.png"));
+            snakeHeadDown = ImageIO.read(SnakeSegment.class.getResourceAsStream("/img/snake_head_down.png"));
         } catch (IOException ex) {
             System.out.println(ex);
         }

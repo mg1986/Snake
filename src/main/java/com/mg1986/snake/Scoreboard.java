@@ -1,17 +1,10 @@
 package com.mg1986.snake;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.io.File;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
 
 /**
  * Author: Matthew Gray
@@ -36,8 +29,10 @@ public class Scoreboard extends JPanel {
         setMaximumSize(getPreferredSize());
 
         try {
-            appleIcon = ImageIO.read(new File("img/apple.png"));
+            //appleIcon = ImageIO.read(new File("/apple.png"));
+            appleIcon = ImageIO.read(Scoreboard.class.getResourceAsStream("/img/apple.png"));
         } catch (IOException ex) {
+           ex.printStackTrace();
             System.out.println(ex);
         }
 

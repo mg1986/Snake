@@ -2,7 +2,6 @@ package com.mg1986.snake;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -26,8 +25,9 @@ public class Apple extends Square {
         this.currentY = segmentY;
         this.appleCount = 0;
         try {
-            appleImage = ImageIO.read(new File("img" + File.separator + "apple_small.png"));
-        } catch (IOException ex) {
+            appleImage = ImageIO.read(Apple.class.getResourceAsStream("/img/apple_small.png"));
+        }
+        catch (IOException ex) {
             System.out.println(ex);
         }
     }
