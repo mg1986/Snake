@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,7 +9,7 @@ import java.io.IOException;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * Apple class -
+ * com.mg1986.Snake.Apple class -
  */
 
 public class Apple extends Square {
@@ -24,7 +26,7 @@ public class Apple extends Square {
         this.currentY = segmentY;
         this.appleCount = 0;
         try {
-            appleImage = ImageIO.read(new File("img/apple_small.png"));
+            appleImage = ImageIO.read(new File("img" + File.separator + "apple_small.png"));
         } catch (IOException ex) {
             System.out.println(ex);
         }

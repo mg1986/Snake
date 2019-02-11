@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * GameMenu class -
+ * com.mg1986.Snake.GameMenu class -
  */
 
 public class GameMenu extends JPanel implements KeyListener {

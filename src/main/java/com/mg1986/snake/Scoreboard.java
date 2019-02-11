@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,7 +17,7 @@ import javax.swing.BorderFactory;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * Scoreboard class -
+ * com.mg1986.Snake.Scoreboard class -
  */
 
 public class Scoreboard extends JPanel {

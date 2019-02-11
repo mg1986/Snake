@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -5,7 +7,7 @@ import javax.swing.WindowConstants;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * Application class - Starting point for game. Creates JFrame and adds GameMemu object to it.
+ * com.mg1986.Snake.Application class - Starting point for game. Creates JFrame and adds GameMemu object to it.
  */
 
 public class Application {

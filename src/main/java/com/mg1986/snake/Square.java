@@ -1,10 +1,12 @@
+package com.mg1986.snake;
+
 import java.awt.Color;
 
 /**
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * Square class -
+ * com.mg1986.Snake.Square class -
  */
 
 public class Square {

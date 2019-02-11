@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * GameMenu class -
+ * com.mg1986.Snake.GameMenu class -
  */
 
 public class Gameboard extends JPanel implements ActionListener, KeyListener {
@@ -152,10 +154,10 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Draw Apple object
+        // Draw com.mg1986.Snake.Apple object
         g.drawImage(apple.appleImage, apple.getCurrentX(), apple.getCurrentY(), this);
 
-        // Draw Snake object
+        // Draw com.mg1986.Snake.Snake object
         for (int idx = 0; idx < snakeBody.size(); idx++) {
 
             SnakeSegment snakeSegment = snakeBody.get(idx);

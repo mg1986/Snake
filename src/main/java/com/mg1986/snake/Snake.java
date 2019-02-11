@@ -1,3 +1,5 @@
+package com.mg1986.snake;
+
 import java.awt.Color;;
 import java.util.ArrayList;
 
@@ -5,7 +7,7 @@ import java.util.ArrayList;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * Snake class -
+ * com.mg1986.Snake.Snake class -
  */
 
 public class Snake {
