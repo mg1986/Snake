@@ -13,7 +13,7 @@ import java.io.IOException;
  * com.mg1986.Snake.Scoreboard class -
  */
 
-public class Scoreboard extends JPanel {
+public class Scoreboard extends BasePanel {
 
     public  JLabel score;
     private BufferedImage appleIcon;

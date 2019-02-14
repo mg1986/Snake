@@ -10,7 +10,7 @@ import javax.swing.*;
  * com.mg1986.Snake.GameMenu class -
  */
 
-public class TitleMenu extends JPanel {
+public class TitleMenu extends BasePanel {
 
     private static final int menuWidth = 480;
     private static final int menuHeight = 715;
@@ -26,6 +26,7 @@ public class TitleMenu extends JPanel {
 
         revalidate();
         repaint();
+        sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -50,5 +51,6 @@ public class TitleMenu extends JPanel {
 
         revalidate();
         repaint();
+        sync();
     }
 }

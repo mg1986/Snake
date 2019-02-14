@@ -1,16 +1,9 @@
 package com.mg1986.snake;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * Author: Matthew Gray
@@ -19,7 +12,7 @@ import javax.swing.JPanel;
  * com.mg1986.Snake.GameMenu class -
  */
 
-public class GameMenu extends JPanel implements KeyListener {
+public class GameMenu extends BasePanel implements KeyListener {
 
     private final String MAIN_MENU = "MAIN_MENU";
     private final String CONTROLS_MENU = "CONTROL_MENU";
@@ -29,7 +22,7 @@ public class GameMenu extends JPanel implements KeyListener {
     private String currentMenu;
 
     //------------------------------------------------------------------------------------------------------------------
-    public GameMenu () {
+    public GameMenu() {
 
         setBackground(Color.BLACK);
 
@@ -107,6 +100,7 @@ public class GameMenu extends JPanel implements KeyListener {
 
         revalidate();
         repaint();
+        sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -132,6 +126,7 @@ public class GameMenu extends JPanel implements KeyListener {
 
         revalidate();
         repaint();
+        sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -147,11 +142,12 @@ public class GameMenu extends JPanel implements KeyListener {
         restartGameMenu.add(Box.createVerticalStrut(175));
         addJLabel(restartGameMenu, "You Lose!", 75);
         restartGameMenu.add(Box.createVerticalStrut(15));
-        addJLabel(restartGameMenu, "[Press ENTER to restart game]", 30);
+        addJLabel(restartGameMenu, "[Press ENTER to restart game]", 25);
         restartGameMenu.setVisible(true);
 
         revalidate();
         repaint();
+        sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -166,5 +162,6 @@ public class GameMenu extends JPanel implements KeyListener {
 
         revalidate();
         repaint();
+        sync();
     }
 }

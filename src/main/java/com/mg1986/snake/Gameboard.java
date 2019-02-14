@@ -1,13 +1,12 @@
 package com.mg1986.snake;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import com.mg1986.snake.GameMenu;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  * com.mg1986.Snake.GameMenu class -
  */
 
-public class Gameboard extends JPanel implements ActionListener, KeyListener {
+public class Gameboard extends BasePanel implements ActionListener, KeyListener {
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
@@ -34,7 +33,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
     private ArrayList<Integer> yPositions;
     private SecureRandom secureRandom;
     private Scoreboard scoreboard;
-    private GameMenu gameMenu;
+    private com.mg1986.snake.GameMenu gameMenu;
     private Timer timer;
 
     //------------------------------------------------------------------------------------------------------------------
@@ -116,6 +115,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
         this.revalidate();
         this.repaint();
+        this.sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -148,6 +148,7 @@ public class Gameboard extends JPanel implements ActionListener, KeyListener {
 
         this.revalidate();
         this.repaint();
+        this.sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------

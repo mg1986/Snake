@@ -1,5 +1,7 @@
 package com.mg1986.snake;
 
+import com.mg1986.snake.GameMenu;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
