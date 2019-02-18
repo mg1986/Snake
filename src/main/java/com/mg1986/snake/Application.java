@@ -1,6 +1,6 @@
 package com.mg1986.snake;
 
-import com.mg1986.snake.GameMenu;
+import com.mg1986.snake.ui.GameMenu;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -34,6 +34,5 @@ public class Application {
         jFrame.pack();
         jFrame.setVisible(true);
     }
-
 }
 

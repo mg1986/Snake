@@ -1,7 +1,7 @@
-package com.mg1986.snake;
+package com.mg1986.snake.ui;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class BasePanel extends JPanel {
 
