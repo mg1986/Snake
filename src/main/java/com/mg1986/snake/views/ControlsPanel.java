@@ -7,13 +7,13 @@ import java.awt.*;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.Snake.ApplicationContainer class -
  */
 
-public class ControlsMenu extends BaseMenu {
+public class ControlsPanel extends BasePanel {
 
     //------------------------------------------------------------------------------------------------------------------
-    public ControlsMenu() {
+    public ControlsPanel() {
 
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(menuWidth, menuHeight));

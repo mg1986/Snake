@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
  * com.mg1986.Snake.Scoreboard class -
  */
 
-public class Scoreboard extends BaseMenu {
+public class Scoreboard extends BasePanel {
 
     public JLabel score;
     private BufferedImage appleIcon;

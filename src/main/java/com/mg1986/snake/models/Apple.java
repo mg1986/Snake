@@ -39,7 +39,7 @@ public class Apple extends BaseElement {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public void incrementAppleCount() { appleCount += 1;};
+    public void incrementAppleCount() { appleCount += APPLE_COUNTER_INCREMENT_VALUE;};
 
     //------------------------------------------------------------------------------------------------------------------
     public void relocateApple(int newX, int newY) {

@@ -12,10 +12,10 @@ import com.mg1986.snake.models.SnakeElement;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.Snake.ApplicationContainer class -
  */
 
-public class Gameboard extends BaseMenu {
+public class Gameboard extends BasePanel {
 
     private Apple apple;
     private Snake snake;

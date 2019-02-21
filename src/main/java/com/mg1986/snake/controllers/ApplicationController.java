@@ -1,22 +1,17 @@
 package com.mg1986.snake.controllers;
 
-import java.awt.*;
-import javax.swing.*;
-import java.util.ArrayList;
-import java.awt.event.KeyEvent;
-import java.security.SecureRandom;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import com.mg1986.snake.models.Apple;
 import com.mg1986.snake.models.Snake;
 import com.mg1986.snake.models.SnakeHead;
-import com.mg1986.snake.views.BaseMenu;
-import com.mg1986.snake.views.Gameboard;
-import com.mg1986.snake.views.Scoreboard;
-import com.mg1986.snake.views.ApplicationPanel;
+import com.mg1986.snake.views.*;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -24,11 +19,16 @@ public class ApplicationController implements ActionListener, KeyListener {
 
     public Apple apple;
     public Snake snake;
-    public MenuController menuController;
 
     private boolean gameOver;
     private boolean gamePaused;
 
+    private String currentMenuType;
+    private BasePanel currentMenu;
+    public static final String TITLE_MENU = "TITLE_MENU";
+    public static final String CONTROLS_MENU = "CONTROLS_MENU";
+    public static final String GAME_BOARD = "GAME_BOARD";
+    public static final String RESTART_MENU = "RESTART_MENU";
     private static final int applicationWidth = 480;
     private static final int applicationHeight = 715;
     private static final int boardWidth = 480;
@@ -36,27 +36,23 @@ public class ApplicationController implements ActionListener, KeyListener {
     private final int moveInterval = 16;
     private ArrayList<Integer> xPositions;
     private ArrayList<Integer> yPositions;
-    private int gameSpeed = 150;
+    private final int startingGameSpeed = 150;
+    private int gameSpeed;
     private SecureRandom secureRandom;
     private Gameboard gameboard;
     private Scoreboard scoreboard;
-    private ApplicationPanel applicationPanel;
+    private ApplicationContainer applicationContainer;
     private Timer timer;
-    public String gameStatus;
 
     //------------------------------------------------------------------------------------------------------------------
     public ApplicationController() {
 
-        applicationPanel = new ApplicationPanel(applicationWidth, applicationHeight, this);
+        applicationContainer = new ApplicationContainer(applicationWidth, applicationHeight, this);
         secureRandom = new SecureRandom();
         xPositions = createXYArrayList(moveInterval, boardWidth);
         yPositions = createXYArrayList(moveInterval, boardHeight);
-        apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
-        snake = new Snake(boardWidth/2, boardHeight/2);
         gameOver = false;
         gamePaused = false;
-        gameStatus = "N";
-        menuController = new MenuController(applicationPanel, this);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -69,35 +65,44 @@ public class ApplicationController implements ActionListener, KeyListener {
         jFrame.setResizable(false);
         jFrame.setVisible(true);
 
-        applicationPanel.setBounds(0, 0, applicationWidth, applicationHeight);
-        jFrame.add(applicationPanel);
+        applicationContainer.setBounds(0, 0, applicationWidth, applicationHeight);
+        jFrame.add(applicationContainer);
         jFrame.pack();
 
-        menuController.createMenu(MenuController.TITLE_MENU, applicationPanel, this);
+        gameOver = setGameOver(true);
+        createMenu(TITLE_MENU, applicationContainer, this);
     }
 
     //------------------------------------------------------------------------------------------------------------------
     public void startGame() {
 
-        gameStatus = "Y";
-        applicationPanel.removeAll();
+        gameSpeed = startingGameSpeed;
+        gameOver = setGameOver(false);
+        applicationContainer.removeAll();
+
+        apple = new Apple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
+        snake = new Snake(boardWidth / 2, boardHeight / 2);
 
         scoreboard = new Scoreboard();
-        applicationPanel.add(scoreboard);
+        applicationContainer.add(scoreboard);
         gameboard = new Gameboard(apple, snake, this);
-        applicationPanel.add(gameboard);
+        applicationContainer.add(gameboard);
+        gameboard.requestFocus();
 
         timer = new Timer(gameSpeed, this);
         timer.start();
+        updateView();
     }
 
     //------------------------------------------------------------------------------------------------------------------
     @Override
-    public void keyTyped(KeyEvent keyEvent) { }
+    public void keyTyped(KeyEvent keyEvent) {
+    }
 
     //------------------------------------------------------------------------------------------------------------------
     @Override
-    public void keyReleased(KeyEvent keyEvent) {}
+    public void keyReleased(KeyEvent keyEvent) {
+    }
 
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -105,7 +110,7 @@ public class ApplicationController implements ActionListener, KeyListener {
 
         int keyEventCode = keyEvent.getKeyCode();
 
-        if (gameStatus.equals("Y")) {
+        if (!gameOver) {
             SnakeHead head = snake.getSnakeHead();
             String direction = head.getDirection();
 
@@ -116,7 +121,7 @@ public class ApplicationController implements ActionListener, KeyListener {
                 case VK_LEFT:
                     if (!direction.equals("RIGHT") && !gamePaused) head.setDirection("LEFT");
                     break;
-               case VK_UP:
+                case VK_UP:
                     if (!direction.equals("DOWN") && !gamePaused) head.setDirection("UP");
                     break;
                 case VK_DOWN:
@@ -124,52 +129,51 @@ public class ApplicationController implements ActionListener, KeyListener {
                     break;
                 case VK_P:
                     if (!gamePaused) {
-                        pauseGame(gameboard);
+                        gamePaused = pauseGame(gameboard);
                     } else {
-                        unpauseGame(gameboard);
+                        gamePaused = unpauseGame(gameboard);
                     }
                     break;
                 case VK_Q:
                     System.exit(0);
                     break;
-                case VK_ENTER:
-                    if (gameOver) startGame();
-                    break;
             }
-            menuController.updateView(gameboard);
+            updateView();
         } else {
             if (keyEventCode == VK_ENTER) {
-                switch (menuController.getCurrentMenuType()) {
-                    case MenuController.TITLE_MENU:
-                        menuController.createMenu(MenuController.CONTROLS_MENU, applicationPanel, this);
+                switch (getCurrentMenuType()) {
+                    case TITLE_MENU:
+                        createMenu(CONTROLS_MENU, applicationContainer, this);
                         break;
-                    case MenuController.CONTROLS_MENU:
+                    case CONTROLS_MENU:
                         startGame();
-                        menuController.setCurrentMenuType(MenuController.RESTART_MENU);
+                        setCurrentMenuType(RESTART_MENU);
                         break;
-                    case MenuController.RESTART_MENU:
+                    case RESTART_MENU:
+                        applicationContainer.removeAll();
                         startGame();
                         break;
                 }
+                updateView();
             } else if (keyEventCode == KeyEvent.VK_Q) {
                 System.exit(0);
             }
 
-            menuController.updateView();
+            updateView();
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        updateView(gameboard);
         if (!gameOver) {
 
             SnakeHead head = snake.getSnakeHead();
             String direction = head.getDirection();
             int x = head.getCurrentX();
             int y = head.getCurrentY();
-            switch(direction){
+            switch (direction) {
                 case "RIGHT":
                     x = x + moveInterval;
                     break;
@@ -183,32 +187,27 @@ public class ApplicationController implements ActionListener, KeyListener {
                     y = y + moveInterval;
                     break;
             }
-            gameOver = detectCollision(x, y);
+            detectCollision(x, y);
+            if (gameOver) {
+                timer.stop();
+                createMenu(RESTART_MENU, gameboard, this);
+                updateView();
+            }
             snake.incrementSnake(x, y);
-            menuController.updateView(gameboard);
+            updateView(gameboard);
         }
-
-        menuController.updateView();
     }
 
-
-
     //------------------------------------------------------------------------------------------------------------------
-    private boolean detectCollision(int x, int y) {
-
-        boolean gameOver = false;
+    private void detectCollision(int x, int y) {
 
         boolean outOfBounds = (x < 0 || x > boardWidth - moveInterval || y < 0 || y > boardHeight - moveInterval);
 
         if (outOfBounds || snake.selfIntersection(x, y)) {
-
-            menuController.createMenu(MenuController.RESTART_MENU, applicationPanel, this);
-            applicationPanel.requestFocus();
-            gameOver = true;
+            this.gameOver = setGameOver(true);
 
         } else if (apple.appleCollision(x, y)) {
 
-            apple.incrementAppleCount();
             int appleCount = apple.getAppleCount();
 
             if (appleCount <= 10) {
@@ -231,16 +230,15 @@ public class ApplicationController implements ActionListener, KeyListener {
             apple.relocateApple(selectRandomIndex(xPositions), selectRandomIndex(yPositions));
             scoreboard.score.setText(" x " + apple.getFormattedAppleCount());
 
+            // Reset timer with new game speed
             timer.stop();
             timer = new Timer(gameSpeed, this);
             timer.start();
         }
-
-        return gameOver;
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public ArrayList<Integer> createXYArrayList (int multiple, int maxNumber) {
+    public ArrayList<Integer> createXYArrayList(int multiple, int maxNumber) {
         maxNumber = maxNumber - multiple;
         ArrayList<Integer> possiblePositions = new ArrayList<>();
         for (int x = 0; x <= maxNumber; x = x + multiple) {
@@ -257,16 +255,87 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    private void pauseGame(Gameboard gameboard) {
-        gameboard.addJLabel ("Paused", 35);
+    private boolean pauseGame(Gameboard gameboard) {
+        gameboard.addJLabel("Paused", 35);
+        updateView(gameboard);
         timer.stop();
-        gamePaused = true;
+        return true;
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    private void unpauseGame(Gameboard gameboard) {
+    private boolean unpauseGame(Gameboard gameboard) {
         gameboard.removeAll();
         timer.start();
-        gamePaused = false;
+        return false;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    private boolean setGameOver(boolean gameStatus) {
+        return gameStatus;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public String getCurrentMenuType() {
+        return currentMenuType;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void setCurrentMenuType(String newMenu) {
+        currentMenuType = newMenu;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public BasePanel getCurrentMenu() {
+        return currentMenu;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void setCurrentMenu(BasePanel newMenu) {
+        currentMenu = newMenu;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void createMenu(String menuType, BasePanel basePanel, ApplicationController applicationController) {
+
+        basePanel.removeAll();
+
+        BasePanel newMenu = new BasePanel();
+
+        switch(menuType) {
+            case TITLE_MENU:
+                newMenu = new TitlePanel();
+                break;
+            case CONTROLS_MENU:
+                newMenu = new ControlsPanel();
+                break;
+            case GAME_BOARD:
+                newMenu = new Gameboard(apple, snake, this);
+                break;
+            case RESTART_MENU:
+                newMenu = new RestartPanel();
+                break;
+        }
+
+        newMenu.setFocusable(true);
+        newMenu.addKeyListener(applicationController);
+        basePanel.add(newMenu);
+        newMenu.requestFocus();
+        setCurrentMenuType(menuType);
+        setCurrentMenu(newMenu);
+        updateView();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void updateView() {
+        currentMenu.revalidate();
+        currentMenu.repaint();
+        currentMenu.sync();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void updateView(BasePanel basePanel) {
+        basePanel.revalidate();
+        basePanel.repaint();
+        basePanel.sync();
     }
 }

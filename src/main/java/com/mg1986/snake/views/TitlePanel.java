@@ -3,7 +3,6 @@ package com.mg1986.snake.views;
 import java.awt.*;
 import javax.swing.*;
 
-import com.mg1986.snake.controllers.ApplicationController;
 import com.mg1986.snake.models.Apple;
 import com.mg1986.snake.models.SnakeHead;
 
@@ -11,13 +10,13 @@ import com.mg1986.snake.models.SnakeHead;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.Snake.ApplicationContainer class -
  */
 
-public class TitleMenu extends BaseMenu {
+public class TitlePanel extends BasePanel {
 
     //------------------------------------------------------------------------------------------------------------------
-    public TitleMenu() {
+    public TitlePanel() {
 
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(menuWidth, menuHeight));

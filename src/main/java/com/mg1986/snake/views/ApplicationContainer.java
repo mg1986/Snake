@@ -9,13 +9,13 @@ import javax.swing.*;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.Snake.ApplicationContainer class -
  */
 
-public class ApplicationPanel extends BaseMenu {
+public class ApplicationContainer extends BasePanel {
 
     //------------------------------------------------------------------------------------------------------------------
-    public ApplicationPanel(int width, int height, ApplicationController applicationController) {
+    public ApplicationContainer(int width, int height, ApplicationController applicationController) {
 
         setBackground(Color.BLACK);
         setFocusable(true);

@@ -3,7 +3,7 @@ package com.mg1986.snake.views;
 import java.awt.*;
 import javax.swing.*;
 
-public class BaseMenu extends JPanel {
+public class BasePanel extends JPanel {
 
     public static final int menuWidth = 480;
     public static final int menuHeight = 715;

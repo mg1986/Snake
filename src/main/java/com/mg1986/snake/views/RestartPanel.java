@@ -7,14 +7,14 @@ import java.awt.*;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.Snake.ApplicationContainer class -
  */
 
-public class RestartMenu extends BaseMenu {
+public class RestartPanel extends BasePanel {
 
     public int menuHeightUpdated = 400;
     //------------------------------------------------------------------------------------------------------------------
-    public RestartMenu() {
+    public RestartPanel() {
 
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(menuWidth, menuHeightUpdated));
