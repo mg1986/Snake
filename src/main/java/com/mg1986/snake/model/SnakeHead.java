@@ -1,4 +1,4 @@
-package com.mg1986.snake.models;
+package com.mg1986.snake.model;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

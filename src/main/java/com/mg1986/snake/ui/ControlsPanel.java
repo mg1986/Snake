@@ -1,4 +1,4 @@
-package com.mg1986.snake.views;
+package com.mg1986.snake.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.*;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationContainer class -
+ * com.mg1986.Snake.ApplicationPanel class -
  */
 
 public class ControlsPanel extends BasePanel {

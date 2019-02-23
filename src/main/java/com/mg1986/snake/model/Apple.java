@@ -1,4 +1,4 @@
-package com.mg1986.snake.models;
+package com.mg1986.snake.model;
 
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -31,23 +31,25 @@ public class Apple extends BaseElement {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public int getAppleCount() { return this.appleCount;}
-
-    //------------------------------------------------------------------------------------------------------------------
     public BufferedImage getAppleImage() {
         return this.appleImage;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void setAppleImage(String bufferedImagePath) {
+        try {
+            appleImage = ImageIO.read(Apple.class.getResourceAsStream(bufferedImagePath));
+        }
+        catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------
     public void incrementAppleCount() { appleCount += APPLE_COUNTER_INCREMENT_VALUE;};
 
     //------------------------------------------------------------------------------------------------------------------
-    public void relocateApple(int newX, int newY) {
-
-        setCurrentX(newX);
-        setCurrentY(newY);
-        incrementAppleCount();
-    }
+    public int getAppleCount() { return this.appleCount;}
 
     //------------------------------------------------------------------------------------------------------------------
     public String getFormattedAppleCount() { return String.format ("%03d", getAppleCount()); }

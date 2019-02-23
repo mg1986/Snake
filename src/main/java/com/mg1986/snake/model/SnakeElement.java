@@ -1,9 +1,6 @@
-package com.mg1986.snake.models;
+package com.mg1986.snake.model;
 
 import java.awt.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 
 /**
  * Author: Matthew Gray

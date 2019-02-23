@@ -1,4 +1,4 @@
-package com.mg1986.snake.views;
+package com.mg1986.snake.ui;
 
 import java.awt.*;
 import javax.swing.*;

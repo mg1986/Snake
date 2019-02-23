@@ -1,23 +1,24 @@
-package com.mg1986.snake.views;
+package com.mg1986.snake.ui;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 02/20/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationContainer class -
+ * com.mg1986.Snake.ApplicationPanel class -
  */
 
 public class RestartPanel extends BasePanel {
 
-    public int menuHeightUpdated = 400;
+    private int menuWidth = 480;
+    private int menuHeight = 680;
     //------------------------------------------------------------------------------------------------------------------
     public RestartPanel() {
 
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(menuWidth, menuHeightUpdated));
+        setPreferredSize(new Dimension(menuWidth, menuHeight));
         setMaximumSize(getPreferredSize());
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(Box.createVerticalStrut(175));

@@ -1,4 +1,4 @@
-package com.mg1986.snake.views;
+package com.mg1986.snake.ui;
 
 import com.mg1986.snake.controllers.ApplicationController;
 
@@ -9,13 +9,13 @@ import javax.swing.*;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationContainer class -
+ * com.mg1986.Snake.ApplicationPanel class -
  */
 
-public class ApplicationContainer extends BasePanel {
+public class ApplicationPanel extends BasePanel {
 
     //------------------------------------------------------------------------------------------------------------------
-    public ApplicationContainer(int width, int height, ApplicationController applicationController) {
+    public ApplicationPanel(int width, int height, ApplicationController applicationController) {
 
         setBackground(Color.BLACK);
         setFocusable(true);

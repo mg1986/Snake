@@ -1,4 +1,4 @@
-package com.mg1986.snake.models;
+package com.mg1986.snake.model;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ public class Snake {
         snakeBody = new ArrayList<>();
         SnakeHead head = new SnakeHead(headX, headY, Color.GREEN);
         snakeBody.add(head);
+        addSegment(2);
     }
 
     //------------------------------------------------------------------------------------------------------------------

@@ -1,16 +1,16 @@
-package com.mg1986.snake.views;
+package com.mg1986.snake.ui;
 
 import java.awt.*;
 import javax.swing.*;
 
-import com.mg1986.snake.models.Apple;
-import com.mg1986.snake.models.SnakeHead;
+import com.mg1986.snake.model.Apple;
+import com.mg1986.snake.model.SnakeHead;
 
 /**
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationContainer class -
+ * com.mg1986.Snake.ApplicationPanel class -
  */
 
 public class TitlePanel extends BasePanel {
