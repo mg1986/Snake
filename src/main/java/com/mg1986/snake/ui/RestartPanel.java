@@ -12,13 +12,11 @@ import javax.swing.*;
 
 public class RestartPanel extends BasePanel {
 
-    private int menuWidth = 480;
-    private int menuHeight = 680;
     //------------------------------------------------------------------------------------------------------------------
-    public RestartPanel() {
+    public RestartPanel(int width, int height) {
 
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(menuWidth, menuHeight));
+        setPreferredSize(new Dimension(width, height));
         setMaximumSize(getPreferredSize());
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(Box.createVerticalStrut(175));

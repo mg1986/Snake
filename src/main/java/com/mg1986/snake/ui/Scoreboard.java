@@ -17,14 +17,12 @@ public class Scoreboard extends BasePanel {
 
     public JLabel score;
     private BufferedImage appleIcon;
-    private static final int boardWidth = 603;
-    private static final int boardHeight = 75;
 
-    public Scoreboard() {
+    public Scoreboard(int width, int height) {
 
         setBackground(Color.BLACK);
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(24, 131, 215)));
-        setPreferredSize(new Dimension(boardWidth, boardHeight));
+        setPreferredSize(new Dimension(width, height));
         setMaximumSize(getPreferredSize());
 
         try {

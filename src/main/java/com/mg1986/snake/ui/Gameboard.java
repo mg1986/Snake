@@ -19,23 +19,21 @@ public class Gameboard extends BasePanel {
 
     private Apple apple;
     private Snake snake;
-    private static final int boardWidth = 480;
-    private static final int boardHeight = 640;
     private static final int slitherGap = 1;
     private static final int modulusValue1 = 4;
     private static final int modulusValue2 = 2;
     private static final int divideValue = 10;
 
     //------------------------------------------------------------------------------------------------------------------
-    public Gameboard (Apple apple, Snake snake, ApplicationController applicationController) {
+    public Gameboard (int width, int height, Apple apple, Snake snake, ApplicationController applicationController) {
         this.apple = apple;
         this.snake = snake;
         setFocusable(true);
         addKeyListener(applicationController);
         setVisible(true);
         setBackground(Color.BLACK);
-        setSize(boardWidth, boardHeight);
-        setPreferredSize(new Dimension(boardWidth, boardHeight));
+        setSize(width, height);
+        setPreferredSize(new Dimension(width, height));
         setMaximumSize(getPreferredSize());
         requestFocus();
     }

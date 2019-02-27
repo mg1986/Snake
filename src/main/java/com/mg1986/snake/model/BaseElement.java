@@ -11,7 +11,7 @@ import java.awt.Color;
 
 public class BaseElement {
 
-    public static final int segmentSize = 15;
+    public final int segmentSize = 17;
     public int currentX;
     public int currentY;
     public int previousX;

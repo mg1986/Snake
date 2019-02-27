@@ -41,17 +41,18 @@ public class TitlePanel extends BasePanel {
         // y coordinate all menu decorations drawn on
         int y = 385;
 
-        // Draw com.mg1986.Snake.Apple
+        // Draw Apple
         Apple apple = new Apple(440, y);
         g.drawImage(apple.getAppleImage(), apple.getCurrentX(), apple.getCurrentY(), this);
 
-        // Draw com.mg1986.Snake.Snake
+        // Draw Snake
         SnakeHead snakeHead = new SnakeHead(380, y, Color.GREEN);
         g.drawImage(snakeHead.snakeHeadRight, snakeHead.getCurrentX(), snakeHead.getCurrentY(), this);
         g.setColor(snakeHead.getColor());
 
-        for(int x = 364; x >= 40; x = x - 16) {
-            g.drawRect(x, y, 15, 15);
+        int segmentSize = snakeHead.segmentSize;
+        for(int x = 364; x >= 40; x = x - segmentSize) {
+            g.drawRect(x, y, segmentSize, segmentSize);
         }
 
         revalidate();

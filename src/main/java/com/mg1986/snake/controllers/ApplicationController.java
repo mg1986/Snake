@@ -19,16 +19,16 @@ public class ApplicationController implements ActionListener, KeyListener {
     private boolean gameOver;
     private boolean gamePaused;
 
-    private String currentMenuType;
     private BasePanel currentMenu;
+    private String currentMenuType;
     private static final String TITLE_MENU = "TITLE_MENU";
     private static final String CONTROLS_MENU = "CONTROLS_MENU";
     private static final String RESTART_MENU = "RESTART_MENU";
-    private static final int applicationWidth = 480;
-    private static final int applicationHeight = 715;
-    private static final int boardWidth = 480;
-    private static final int boardHeight = 640;
-    private final int moveInterval = 16;
+    private static final int applicationWidth = 540;
+    private static final int applicationHeight = 810;
+    private static final int boardWidth = applicationWidth;
+    private static final int boardHeight = 720;
+    private final int moveInterval = 18;
     private ArrayList<Integer> xPositions;
     private ArrayList<Integer> yPositions;
     private SecureRandom secureRandom;
@@ -68,9 +68,9 @@ public class ApplicationController implements ActionListener, KeyListener {
         snake = new Snake(boardWidth / 2, boardHeight / 2);
 
         applicationPanel.removeAll();
-        scoreboard = new Scoreboard();
+        scoreboard = new Scoreboard(boardWidth, 85);
         applicationPanel.add(scoreboard);
-        gameboard = new Gameboard(apple, snake, this);
+        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this);
         applicationPanel.add(gameboard);
         gameboard.requestFocus();
 
@@ -295,7 +295,7 @@ public class ApplicationController implements ActionListener, KeyListener {
                 newMenu = new ControlsPanel();
                 break;
             case RESTART_MENU:
-                newMenu = new RestartPanel();
+                newMenu = new RestartPanel(boardWidth, boardHeight);
                 break;
         }
 
