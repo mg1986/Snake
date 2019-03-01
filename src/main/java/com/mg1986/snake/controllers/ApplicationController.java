@@ -72,7 +72,7 @@ public class ApplicationController implements ActionListener, KeyListener {
         applicationPanel.removeAll();
         scoreboard = new Scoreboard(boardWidth, 85);
         applicationPanel.add(scoreboard);
-        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this, gameOver);
+        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this);
         applicationPanel.add(gameboard);
         gameboard.requestFocus();
 
@@ -126,6 +126,7 @@ public class ApplicationController implements ActionListener, KeyListener {
             if (keyEventCode == VK_ENTER) {
                 switch (currentMenuType) {
                     case TITLE_MENU:
+                        applicationPanel.removeAll();
                         createMenu(CONTROLS_MENU, applicationPanel, this);
                         break;
                     case CONTROLS_MENU:
@@ -167,7 +168,8 @@ public class ApplicationController implements ActionListener, KeyListener {
             detectCollision(x, y);
             if (gameOver) {
                 timer.stop();
-                createMenu(RESTART_MENU, gameboard, this);
+                applicationPanel.remove(gameboard);
+                createMenu(RESTART_MENU, applicationPanel, this);
             }
 
             snake.incrementSnake(x, y);
@@ -183,14 +185,16 @@ public class ApplicationController implements ActionListener, KeyListener {
         if (outOfBounds || snake.selfIntersection(x, y)) {
             gameOver = true;
         } else if (apple.appleCollision(x, y)) {
+
+            // Get apple count, relocate apple, increment score, increment snake
             int appleCount = scoreboard.getScore();
+            relocateApple ();
             scoreboard.setScore(appleCount + APPLE_INCREMENT_VALUE);
             snake.addSegment(SNAKE_INCREMENT_VALUE);
-            relocateApple ();
 
             // Reset timer with new game speed
-            timer.stop();
             int gameSpeed = calculateGameSpeed(appleCount);
+            timer.stop();
             timer = new Timer(gameSpeed, this);
             timer.start();
         }
@@ -266,8 +270,6 @@ public class ApplicationController implements ActionListener, KeyListener {
 
     //------------------------------------------------------------------------------------------------------------------
     public void createMenu(String menuType, BasePanel basePanel, ApplicationController applicationController) {
-
-        basePanel.removeAll();
 
         BasePanel newMenu = new BasePanel();
 
