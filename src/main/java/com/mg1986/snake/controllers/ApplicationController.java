@@ -21,11 +21,13 @@ public class ApplicationController implements ActionListener, KeyListener {
 
     private BasePanel currentMenu;
     private String currentMenuType;
+    private static final int APPLE_INCREMENT_VALUE = 1;
+    private static final int SNAKE_INCREMENT_VALUE = 2;
     private static final String TITLE_MENU = "TITLE_MENU";
     private static final String CONTROLS_MENU = "CONTROLS_MENU";
     private static final String RESTART_MENU = "RESTART_MENU";
     private static final int applicationWidth = 540;
-    private static final int applicationHeight = 810;
+    private static final int applicationHeight = 805;
     private static final int boardWidth = applicationWidth;
     private static final int boardHeight = 720;
     private final int moveInterval = 18;
@@ -70,13 +72,14 @@ public class ApplicationController implements ActionListener, KeyListener {
         applicationPanel.removeAll();
         scoreboard = new Scoreboard(boardWidth, 85);
         applicationPanel.add(scoreboard);
-        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this);
+        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this, gameOver);
         applicationPanel.add(gameboard);
         gameboard.requestFocus();
 
         timer = new Timer(gameSpeed, this);
         timer.start();
         updateView();
+
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -180,16 +183,14 @@ public class ApplicationController implements ActionListener, KeyListener {
         if (outOfBounds || snake.selfIntersection(x, y)) {
             gameOver = true;
         } else if (apple.appleCollision(x, y)) {
-            int appleCount = apple.getAppleCount();
+            int appleCount = scoreboard.getScore();
+            scoreboard.setScore(appleCount + APPLE_INCREMENT_VALUE);
+            snake.addSegment(SNAKE_INCREMENT_VALUE);
             relocateApple ();
-            scoreboard.score.setText(" x " + apple.getFormattedAppleCount());
-
-            int gameSpeed = calculateGameSpeed(appleCount);
-            int snakeSegments = calculateSnakeSegments(appleCount);
-            snake.addSegment(snakeSegments);
 
             // Reset timer with new game speed
             timer.stop();
+            int gameSpeed = calculateGameSpeed(appleCount);
             timer = new Timer(gameSpeed, this);
             timer.start();
         }
@@ -207,24 +208,8 @@ public class ApplicationController implements ActionListener, KeyListener {
             } else if (appleCount <= 50) {
                 newGameSpeed = gameSpeed - 1;
             }
-        } else if (gameSpeed < 50 && (appleCount <= 100 && appleCount % 10 == 0)) {
-            newGameSpeed = gameSpeed - 1;
         }
-
         return newGameSpeed;
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
-    private int calculateSnakeSegments (int appleCount) {
-        int snakeSegments;
-
-        if (appleCount <= 50) {
-            snakeSegments = 2;
-        } else {
-            snakeSegments = 1;
-        }
-
-        return snakeSegments;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -243,7 +228,6 @@ public class ApplicationController implements ActionListener, KeyListener {
             }
         }
 
-        apple.incrementAppleCount();
         updateView(gameboard);
     }
 

@@ -25,7 +25,7 @@ public class TitlePanel extends BasePanel {
         setVisible(true);
         add(Box.createVerticalStrut(175));
         addJLabel("SNAKE", 125);
-        addJLabel("A game by Matt Gray 2018", 20);
+        addJLabel("A game by Matt Gray 2018", 25);
         add(Box.createVerticalStrut(80));
         addJLabel("[Press ENTER]", 30);
 

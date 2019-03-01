@@ -15,10 +15,15 @@ import java.awt.image.BufferedImage;
 
 public class Scoreboard extends BasePanel {
 
-    public JLabel score;
+    private int score;
+    private JLabel scoreLabel;
+    private JLabel appleIconImage;
     private BufferedImage appleIcon;
 
+    //------------------------------------------------------------------------------------------------------------------
     public Scoreboard(int width, int height) {
+
+        score = 0;
 
         setBackground(Color.BLACK);
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(24, 131, 215)));
@@ -32,14 +37,26 @@ public class Scoreboard extends BasePanel {
             System.out.println(ex);
         }
 
-        JLabel appleIconImage = new JLabel(new ImageIcon(appleIcon));
+        appleIconImage = new JLabel(new ImageIcon(appleIcon));
         add(appleIconImage);
-        score  = new JLabel(" x 000", SwingConstants.RIGHT);
-        score.setFont(new Font("Century Gothic", score.getFont().getStyle(), 35));
-        score.setForeground(Color.WHITE);
-        add(score);
+
+        scoreLabel = new JLabel(" x 000", SwingConstants.RIGHT);
+        scoreLabel.setFont(new Font("Century Gothic", scoreLabel.getFont().getStyle(), 35));
+        scoreLabel.setForeground(Color.WHITE);
+        add(scoreLabel);
 
         setVisible(true);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public int getScore() {
+        return this.score;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void setScore(int score) {
+        this.score = score;
+        scoreLabel.setText(" x " + String.format ("%03d", score));
     }
 }
 

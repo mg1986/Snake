@@ -13,15 +13,13 @@ import java.awt.image.BufferedImage;
 
 public class Apple extends BaseElement {
 
-    private int appleCount;
     private BufferedImage appleImage;
-    private final int APPLE_COUNTER_INCREMENT_VALUE = 1;
 
     //------------------------------------------------------------------------------------------------------------------
     public Apple (int appleX, int appleY) {
         this.currentX = appleX;
         this.currentY = appleY;
-        this.appleCount = 0;
+
         try {
             appleImage = ImageIO.read(Apple.class.getResourceAsStream("/img/apple_small.png"));
         }
@@ -44,15 +42,6 @@ public class Apple extends BaseElement {
             System.out.println(ex);
         }
     }
-
-    //------------------------------------------------------------------------------------------------------------------
-    public void incrementAppleCount() { appleCount += APPLE_COUNTER_INCREMENT_VALUE;};
-
-    //------------------------------------------------------------------------------------------------------------------
-    public int getAppleCount() { return this.appleCount;}
-
-    //------------------------------------------------------------------------------------------------------------------
-    public String getFormattedAppleCount() { return String.format ("%03d", getAppleCount()); }
 
     //------------------------------------------------------------------------------------------------------------------
     public boolean appleCollision(int x, int y) {
