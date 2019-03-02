@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.Snake class -
+ * com.mg1986.Snake.model.Snake class -
  */
 
 public class Snake {
@@ -16,9 +16,7 @@ public class Snake {
     private ArrayList<SnakeElement> snakeBody;
 
     //------------------------------------------------------------------------------------------------------------------
-    public Snake() {}
-
-    //------------------------------------------------------------------------------------------------------------------
+    // Snake constructor - Takes X and Y coordinates to place SnakeHead
     public Snake (int headX, int headY) {
         snakeBody = new ArrayList<>();
         SnakeHead head = new SnakeHead(headX, headY, Color.GREEN);

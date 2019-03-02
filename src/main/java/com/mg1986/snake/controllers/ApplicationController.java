@@ -15,7 +15,7 @@ import com.mg1986.snake.model.SnakeElement;
  * Author: Matthew Gray
  * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.model.ApplicationController class
+ * com.mg1986.Snake.controllers.ApplicationController class
  */
 
 public class ApplicationController implements ActionListener, KeyListener {
@@ -150,7 +150,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    //  actionPerformed() - ActionListener interface implementation logic
+    // actionPerformed() - ActionListener interface implementation logic
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
@@ -224,6 +224,8 @@ public class ApplicationController implements ActionListener, KeyListener {
             } else if (appleCount <= 50) {
                 newGameSpeed = gameSpeed - 1;
             }
+        } else if (gameSpeed > 50 && appleCount <= 100 && appleCount % 10 == 0) {
+            newGameSpeed = gameSpeed - 1;
         }
 
         return newGameSpeed;
