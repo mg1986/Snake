@@ -24,8 +24,8 @@ public class ApplicationController implements ActionListener, KeyListener {
     public Snake snake;
     private boolean gameOver;
     private boolean gamePaused;
-    private Gameboard gameboard;
-    private Scoreboard scoreboard;
+    private GamePanel gameboard;
+    private ScorePanel scoreboard;
     private BasePanel currentMenu;
     private String currentMenuType;
     private static final int APPLE_INCREMENT_VALUE = 1;
@@ -76,9 +76,9 @@ public class ApplicationController implements ActionListener, KeyListener {
         snake = new Snake(boardWidth / 2, boardHeight / 2);
 
         applicationPanel.removeAll();
-        scoreboard = new Scoreboard(boardWidth, 85);
+        scoreboard = new ScorePanel(boardWidth, 85);
         applicationPanel.add(scoreboard);
-        gameboard = new Gameboard(boardWidth, boardHeight, apple, snake, this);
+        gameboard = new GamePanel(boardWidth, boardHeight, apple, snake, this);
         applicationPanel.add(gameboard);
         gameboard.requestFocus();
 
@@ -272,18 +272,18 @@ public class ApplicationController implements ActionListener, KeyListener {
 
     //------------------------------------------------------------------------------------------------------------------
     // pauseGame() - Stops timer and pauses game
-    private boolean pauseGame(Gameboard gameboard) {
-        gameboard.addJLabel("Paused", 35);
-        updateView(gameboard);
+    private boolean pauseGame(GamePanel gamePanel) {
+        gamePanel.addJLabel("Paused", 35);
+        updateView(gamePanel);
         timer.stop();
         return true;
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // unpauseGame() - Starts timer and resumes game
-    private boolean unpauseGame(Gameboard gameboard) {
-        gameboard.removeAll();
-        updateView(gameboard);
+    private boolean unpauseGame(GamePanel gamePanel) {
+        gamePanel.removeAll();
+        updateView(gamePanel);
         timer.start();
         return false;
     }

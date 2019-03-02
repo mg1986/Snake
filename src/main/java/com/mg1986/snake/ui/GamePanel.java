@@ -15,7 +15,7 @@ import com.mg1986.snake.model.SnakeElement;
  * com.mg1986.Snake.ApplicationPanel class -
  */
 
-public class Gameboard extends BasePanel {
+public class GamePanel extends BasePanel {
 
     private Apple apple;
     private Snake snake;
@@ -25,7 +25,7 @@ public class Gameboard extends BasePanel {
     private static final int divideValue = 10;
 
     //------------------------------------------------------------------------------------------------------------------
-    public Gameboard (int width, int height, Apple apple, Snake snake, ApplicationController applicationController) {
+    public GamePanel(int width, int height, Apple apple, Snake snake, ApplicationController applicationController) {
         this.apple = apple;
         this.snake = snake;
         setFocusable(true);

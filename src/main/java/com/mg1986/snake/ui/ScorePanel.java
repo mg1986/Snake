@@ -10,10 +10,10 @@ import java.awt.image.BufferedImage;
  * Author: Matthew Gray
  * Last Modified: 3/7/2018
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.Scoreboard class -
+ * com.mg1986.Snake.ScorePanel class -
  */
 
-public class Scoreboard extends BasePanel {
+public class ScorePanel extends BasePanel {
 
     private int score;
     private JLabel scoreLabel;
@@ -21,7 +21,7 @@ public class Scoreboard extends BasePanel {
     private BufferedImage appleIcon;
 
     //------------------------------------------------------------------------------------------------------------------
-    public Scoreboard(int width, int height) {
+    public ScorePanel(int width, int height) {
 
         score = 0;
 
@@ -31,7 +31,7 @@ public class Scoreboard extends BasePanel {
         setMaximumSize(getPreferredSize());
 
         try {
-            appleIcon = ImageIO.read(Scoreboard.class.getResourceAsStream("/img/apple.png"));
+            appleIcon = ImageIO.read(ScorePanel.class.getResourceAsStream("/img/apple.png"));
         } catch (IOException ex) {
            ex.printStackTrace();
             System.out.println(ex);
