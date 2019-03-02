@@ -4,9 +4,9 @@ import java.awt.Color;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.BaseElement class -
+ * com.mg1986.Snake.model.BaseElement class -
  */
 
 public class BaseElement {
@@ -17,16 +17,6 @@ public class BaseElement {
     public int previousX;
     public int previousY;
     public Color segmentColor;
-
-    //------------------------------------------------------------------------------------------------------------------
-    public BaseElement() {}
-
-    //------------------------------------------------------------------------------------------------------------------
-    public BaseElement(int segmentX, int segmentY, Color color) {
-       this.currentX = segmentX;
-       this.currentY = segmentY;
-       this.segmentColor = color;
-    }
 
     //------------------------------------------------------------------------------------------------------------------
     public int getCurrentX() { return this.currentX; }

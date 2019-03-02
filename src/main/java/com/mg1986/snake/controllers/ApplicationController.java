@@ -11,14 +11,21 @@ import static java.awt.event.KeyEvent.*;
 import com.mg1986.snake.model.SnakeHead;
 import com.mg1986.snake.model.SnakeElement;
 
+/**
+ * Author: Matthew Gray
+ * Last Modified: 3/1/2019
+ * Copyright (C) 2018 Matthew Gray
+ * com.mg1986.Snake.model.ApplicationController class
+ */
+
 public class ApplicationController implements ActionListener, KeyListener {
 
     public Apple apple;
     public Snake snake;
-
     private boolean gameOver;
     private boolean gamePaused;
-
+    private Gameboard gameboard;
+    private Scoreboard scoreboard;
     private BasePanel currentMenu;
     private String currentMenuType;
     private static final int APPLE_INCREMENT_VALUE = 1;
@@ -34,33 +41,32 @@ public class ApplicationController implements ActionListener, KeyListener {
     private ArrayList<Integer> xPositions;
     private ArrayList<Integer> yPositions;
     private SecureRandom secureRandom;
-    private Gameboard gameboard;
-    private Scoreboard scoreboard;
-    private ApplicationFrame applicationFrame;
     private ApplicationPanel applicationPanel;
     private final int startingGameSpeed = 150;
     private int gameSpeed;
     private Timer timer;
 
     //------------------------------------------------------------------------------------------------------------------
+    // startApplication() - Sets up UI components and populates X and Y position ArrayLists.
     public void startApplication() {
 
-        applicationFrame = new ApplicationFrame(applicationWidth, applicationHeight);
+        ApplicationFrame applicationFrame = new ApplicationFrame(applicationWidth, applicationHeight);
         applicationPanel = new ApplicationPanel(applicationWidth, applicationHeight, this);
         applicationPanel.setBounds(0, 0, applicationWidth, applicationHeight);
         applicationFrame.add(applicationPanel);
         applicationFrame.pack();
 
+        gameOver = true;
+        gamePaused = false;
         secureRandom = new SecureRandom();
         xPositions = createXYArrayList(moveInterval, boardWidth);
         yPositions = createXYArrayList(moveInterval, boardHeight);
-        gameOver = true;
-        gamePaused = false;
 
         createMenu(TITLE_MENU, applicationPanel, this);
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // startGame() - Sets up UI components for game, creates new Apple and Snake and starts game timer.
     public void startGame() {
 
         gameSpeed = startingGameSpeed;
@@ -91,13 +97,14 @@ public class ApplicationController implements ActionListener, KeyListener {
     public void keyReleased(KeyEvent keyEvent) {}
 
     //------------------------------------------------------------------------------------------------------------------
+    // keyPressed() - Logic for KeyListener interface implementation
     @Override
     public void keyPressed(KeyEvent keyEvent) {
 
         int keyEventCode = keyEvent.getKeyCode();
         if (keyEventCode == KeyEvent.VK_Q) { System.exit(0); }
 
-        if (!gameOver) {
+        if (!gameOver) { // In game KeyListener logic
             SnakeHead head = snake.getSnakeHead();
             String direction = head.getDirection();
 
@@ -122,7 +129,7 @@ public class ApplicationController implements ActionListener, KeyListener {
                     }
                     break;
             }
-        } else {
+        } else { // Menu KeyListener
             if (keyEventCode == VK_ENTER) {
                 switch (currentMenuType) {
                     case TITLE_MENU:
@@ -143,6 +150,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    //  actionPerformed() - ActionListener interface implementation logic
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
@@ -178,6 +186,9 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // detectCollision() - Takes test X and Y coordinate checks: snake in bounds, snake hasn't self intersected. and
+    //                     if snake head has intersected the Apple. If the apple is intersected, score is increased.
+    //                     If other scenarios happen, gameOver is set to True.
     private void detectCollision(int x, int y) {
 
         boolean outOfBounds = (x < 0 || x > boardWidth - moveInterval || y < 0 || y > boardHeight - moveInterval);
@@ -201,7 +212,8 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    private int calculateGameSpeed( int appleCount) {
+    // calculateGameSpeed() - Sets game speed based off current score
+    private int calculateGameSpeed(int appleCount) {
         int newGameSpeed = startingGameSpeed;
 
         if (gameSpeed > 50) {
@@ -213,10 +225,12 @@ public class ApplicationController implements ActionListener, KeyListener {
                 newGameSpeed = gameSpeed - 1;
             }
         }
+
         return newGameSpeed;
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // relocateApple() - Relocate apple to randomly chosen X and Y coordinates
     private void relocateApple () {
 
         apple.setCurrentX(selectRandomIndex(xPositions));
@@ -236,6 +250,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // createXYArrayList() - Creates an ArrayList of all possible X or Y positions on the game board
     private ArrayList<Integer> createXYArrayList(int multiple, int maxNumber) {
         maxNumber = maxNumber - multiple;
         ArrayList<Integer> possiblePositions = new ArrayList<>();
@@ -247,12 +262,14 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // selectRandomIndex - Picks random index number between 0 and length of input ArrayList
     private int selectRandomIndex(ArrayList<Integer> possiblePositions) {
         int randomIndex = secureRandom.nextInt(possiblePositions.size());
         return possiblePositions.get(randomIndex);
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // pauseGame() - Stops timer and pauses game
     private boolean pauseGame(Gameboard gameboard) {
         gameboard.addJLabel("Paused", 35);
         updateView(gameboard);
@@ -261,6 +278,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // unpauseGame() - Starts timer and resumes game
     private boolean unpauseGame(Gameboard gameboard) {
         gameboard.removeAll();
         updateView(gameboard);
@@ -269,6 +287,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // createMenu() - Creates menu based on the menuType string and is placed on the input BasePanel
     public void createMenu(String menuType, BasePanel basePanel, ApplicationController applicationController) {
 
         BasePanel newMenu = new BasePanel();
@@ -295,6 +314,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // updateView - Refreshes and repaints current BasePanel
     public void updateView() {
         currentMenu.revalidate();
         currentMenu.repaint();
@@ -302,6 +322,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // updateView() - Refreshes and repaints input BasePanel
     public void updateView(BasePanel basePanel) {
         basePanel.revalidate();
         basePanel.repaint();
