@@ -3,11 +3,17 @@ package com.mg1986.snake.ui;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Author: Matthew Gray
+ * Last Modified: 3/3/2019
+ * Copyright (C) 2018 Matthew Gray
+ * com.mg1986.snake.ui.BasePanel class
+ */
+
 public class BasePanel extends JPanel {
 
-    public static final int menuWidth = 480;
-    public static final int menuHeight = 715;
-
+    //------------------------------------------------------------------------------------------------------------------
+    // sync() - Addresses bug in UNIX/LINUX graphics
     public void sync () {
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("inux") || osName.contains("unix")) {
@@ -16,6 +22,7 @@ public class BasePanel extends JPanel {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // addJLabel() - Add JLabel to Panel
     public void addJLabel (String message, int fontSize) {
 
         JLabel jLabel = new JLabel(message);

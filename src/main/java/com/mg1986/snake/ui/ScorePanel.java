@@ -8,19 +8,27 @@ import java.awt.image.BufferedImage;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/3/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ScorePanel class -
+ * com.mg1986.snake.ui.ScorePanel class
  */
 
 public class ScorePanel extends BasePanel {
 
+    // Game score
     private int score;
+
+    // Score JLabel
     private JLabel scoreLabel;
+
+    // Apple image JLabel
     private JLabel appleIconImage;
+
+    // Apple BufferedImage icon
     private BufferedImage appleIcon;
 
     //------------------------------------------------------------------------------------------------------------------
+    // ScorePanel constructor -
     public ScorePanel(int width, int height) {
 
         score = 0;
@@ -49,11 +57,13 @@ public class ScorePanel extends BasePanel {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // getScore() -  Get current game score
     public int getScore() {
         return this.score;
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // setScore() - Set current game score
     public void setScore(int score) {
         this.score = score;
         scoreLabel.setText(" x " + String.format ("%03d", score));

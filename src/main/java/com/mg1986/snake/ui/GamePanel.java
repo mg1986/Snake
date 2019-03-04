@@ -1,18 +1,17 @@
 package com.mg1986.snake.ui;
 
 import java.awt.*;
-
-import com.mg1986.snake.controllers.ApplicationController;
 import com.mg1986.snake.model.Apple;
 import com.mg1986.snake.model.Snake;
 import com.mg1986.snake.model.SnakeHead;
 import com.mg1986.snake.model.SnakeElement;
+import com.mg1986.snake.controllers.ApplicationController;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/3/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.snake.ui.GamePanel class
  */
 
 public class GamePanel extends BasePanel {
@@ -25,6 +24,7 @@ public class GamePanel extends BasePanel {
     private static final int divideValue = 10;
 
     //------------------------------------------------------------------------------------------------------------------
+    // GamePanel constructor - Takes panel width, height, Apple, Snake, and KeyListener as inputs
     public GamePanel(int width, int height, Apple apple, Snake snake, ApplicationController applicationController) {
         this.apple = apple;
         this.snake = snake;
@@ -39,6 +39,7 @@ public class GamePanel extends BasePanel {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // paintComponent() - Animate panel - Refactor pending
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -46,9 +47,9 @@ public class GamePanel extends BasePanel {
         g.drawImage(apple.getAppleImage(), apple.getCurrentX(), apple.getCurrentY(), this);
 
         // Draw com.mg1986.Snake.Snake object
-        for (int idx = 0; idx < snake.getSnakeBodySize(); idx++) {
+        for (int idx = 0; idx < snake.getBodySize(); idx++) {
 
-            SnakeElement SnakeElement = snake.getSnakeBody().get(idx);
+            SnakeElement SnakeElement = snake.getBody().get(idx);
 
             int x = SnakeElement.getCurrentX();
             int y = SnakeElement.getCurrentY();

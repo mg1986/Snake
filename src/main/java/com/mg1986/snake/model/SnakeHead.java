@@ -1,29 +1,29 @@
 package com.mg1986.snake.model;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.SnakeElement class -
+ * com.mg1986.snake.SnakeElement class
  */
 
 public class SnakeHead extends SnakeElement {
 
+    // SnakeHead BufferedImages for each direction
     public BufferedImage snakeHeadRight;
     public BufferedImage snakeHeadLeft;
     public BufferedImage snakeHeadUp;
     public BufferedImage snakeHeadDown;
 
     //------------------------------------------------------------------------------------------------------------------
-    public SnakeHead(int segmentX, int segmentY, Color color) {
+    // SnakeHead constructor - Takes X and Y coordinate for starting position. Starting direction is always "UP"
+    public SnakeHead(int segmentX, int segmentY) {
        currentX = segmentX;
        currentY = segmentY;
-       segmentColor = color;
        segmentDirection = "UP";
         try {
             snakeHeadRight = ImageIO.read(SnakeHead.class.getResourceAsStream("/img/snake_head_right.png"));

@@ -5,14 +5,15 @@ import javax.swing.*;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 02/20/2019
+ * Last Modified: 3/3/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.snake.ui.RestartPanel class
  */
 
 public class RestartPanel extends BasePanel {
 
     //------------------------------------------------------------------------------------------------------------------
+    // RestartPanel constructor -
     public RestartPanel(int width, int height) {
 
         setBackground(Color.BLACK);
@@ -24,9 +25,5 @@ public class RestartPanel extends BasePanel {
         add(Box.createVerticalStrut(15));
         addJLabel("[Press ENTER to restart game]", 25);
         setVisible(true);
-
-        revalidate();
-        repaint();
-        sync();
     }
 }

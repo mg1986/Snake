@@ -2,20 +2,26 @@ package com.mg1986.snake.ui;
 
 import java.awt.*;
 import javax.swing.*;
-
 import com.mg1986.snake.model.Apple;
 import com.mg1986.snake.model.SnakeHead;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/3/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.snake.ui.TitlePanel class
  */
 
 public class TitlePanel extends BasePanel {
 
+    // Panel Height
+    private static final int menuWidth = 480;
+
+    // Panel Width
+    private static final int menuHeight = 715;
+
     //------------------------------------------------------------------------------------------------------------------
+    // TitlePanel constructor -
     public TitlePanel() {
 
         setBackground(Color.BLACK);
@@ -28,17 +34,14 @@ public class TitlePanel extends BasePanel {
         addJLabel("A game by Matt Gray 2018", 25);
         add(Box.createVerticalStrut(80));
         addJLabel("[Press ENTER]", 30);
-
-        revalidate();
-        repaint();
-        sync();
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // paintComponent() - Animate panel
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // y coordinate all menu decorations drawn on
+        // Y coordinate all menu decorations drawn on
         int y = 385;
 
         // Draw Apple
@@ -46,17 +49,13 @@ public class TitlePanel extends BasePanel {
         g.drawImage(apple.getAppleImage(), apple.getCurrentX(), apple.getCurrentY(), this);
 
         // Draw Snake
-        SnakeHead snakeHead = new SnakeHead(380, y, Color.GREEN);
+        SnakeHead snakeHead = new SnakeHead(380, y);
         g.drawImage(snakeHead.snakeHeadRight, snakeHead.getCurrentX(), snakeHead.getCurrentY(), this);
-        g.setColor(snakeHead.getColor());
+        g.setColor(Color.GREEN);
 
         int segmentSize = snakeHead.segmentSize;
         for(int x = 364; x >= 40; x = x - segmentSize) {
             g.drawRect(x, y, segmentSize, segmentSize);
         }
-
-        revalidate();
-        repaint();
-        sync();
     }
 }

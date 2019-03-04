@@ -15,7 +15,7 @@ import com.mg1986.snake.model.SnakeElement;
  * Author: Matthew Gray
  * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.controllers.ApplicationController class
+ * com.mg1986.snake.controllers.ApplicationController class
  */
 
 public class ApplicationController implements ActionListener, KeyListener {
@@ -105,7 +105,7 @@ public class ApplicationController implements ActionListener, KeyListener {
         if (keyEventCode == KeyEvent.VK_Q) { System.exit(0); }
 
         if (!gameOver) { // In game KeyListener logic
-            SnakeHead head = snake.getSnakeHead();
+            SnakeHead head = snake.getHead();
             String direction = head.getDirection();
 
             switch (keyEventCode) {
@@ -154,7 +154,7 @@ public class ApplicationController implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
-            SnakeHead head = snake.getSnakeHead();
+            SnakeHead head = snake.getHead();
             String direction = head.getDirection();
             int x = head.getCurrentX();
             int y = head.getCurrentY();
@@ -204,7 +204,7 @@ public class ApplicationController implements ActionListener, KeyListener {
             snake.addSegment(SNAKE_INCREMENT_VALUE);
 
             // Reset timer with new game speed
-            int gameSpeed = calculateGameSpeed(appleCount);
+            gameSpeed = calculateGameSpeed(appleCount);
             timer.stop();
             timer = new Timer(gameSpeed, this);
             timer.start();
@@ -224,7 +224,7 @@ public class ApplicationController implements ActionListener, KeyListener {
             } else if (appleCount <= 50) {
                 newGameSpeed = gameSpeed - 1;
             }
-        } else if (gameSpeed > 50 && appleCount <= 100 && appleCount % 10 == 0) {
+        } else if (gameSpeed < 50 && appleCount <= 100 && appleCount % 10 == 0) {
             newGameSpeed = gameSpeed - 1;
         }
 
@@ -238,7 +238,7 @@ public class ApplicationController implements ActionListener, KeyListener {
         apple.setCurrentX(selectRandomIndex(xPositions));
         apple.setCurrentY(selectRandomIndex(yPositions));
 
-        for (SnakeElement snakeSegment : snake.getSnakeBody()) {
+        for (SnakeElement snakeSegment : snake.getBody()) {
 
             int segmentX = snakeSegment.getCurrentX();
             int segmentY = snakeSegment.getCurrentY();

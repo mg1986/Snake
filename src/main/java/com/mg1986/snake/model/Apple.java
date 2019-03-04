@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * Author: Matthew Gray
  * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.model.Apple class
+ * com.mg1986.snake.model.Apple class
  */
 
 public class Apple extends BaseElement {
@@ -37,7 +37,7 @@ public class Apple extends BaseElement {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // setAppleImage() - Takes String url to BufferedImage icone for apple
+    // setAppleImage() - Takes String url path for BufferedImage icon
     public void setAppleImage(String bufferedImagePath) {
         try {
             appleImage = ImageIO.read(Apple.class.getResourceAsStream(bufferedImagePath));
@@ -48,7 +48,7 @@ public class Apple extends BaseElement {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // appleCollision() - Takes test X and Y coordinated and returns true if apple is currently located at those
+    // appleCollision() - Takes test X and Y coordinated and returns true if apple is currently located at there
     public boolean appleCollision(int x, int y) {
         return x == getCurrentX() && y == getCurrentY();
     }

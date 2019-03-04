@@ -6,7 +6,7 @@ import java.awt.Color;
  * Author: Matthew Gray
  * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.model.BaseElement class -
+ * com.mg1986.snake.model.BaseElement class
  */
 
 public class BaseElement {

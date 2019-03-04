@@ -5,52 +5,59 @@ import java.util.ArrayList;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/1/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.model.Snake class -
+ * com.mg1986.snake.model.Snake class
  */
 
 public class Snake {
 
-    // Snake body
-    private ArrayList<SnakeElement> snakeBody;
+    // Snake head - ArrayList<SnakeElements> representing snake body
+    private SnakeHead head;
+
+    // Snake body - ArrayList<SnakeElements> representing snake body
+    private ArrayList<SnakeElement> body;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Snake constructor - Takes X and Y coordinates to place SnakeHead
+    // Snake constructor - Takes starting X and Y coordinates to place SnakeHead
     public Snake (int headX, int headY) {
-        snakeBody = new ArrayList<>();
-        SnakeHead head = new SnakeHead(headX, headY, Color.GREEN);
-        snakeBody.add(head);
+        head = new SnakeHead(headX, headY);
+        body = new ArrayList<>();
+        body.add(head);
         addSegment(2);
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public ArrayList<SnakeElement> getSnakeBody() {
-        return snakeBody;
+    // getBody() - Returns ArrayList of SnakeElements
+    public ArrayList<SnakeElement> getBody() {
+        return body;
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public int getSnakeBodySize() {
-        return snakeBody.size();
+    // getBodySize() - Returns size of body ArrayList
+    public int getBodySize() {
+        return body.size();
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public SnakeHead getSnakeHead() {
-        return (SnakeHead) snakeBody.get(0);
+    // getHead() - Returns SnakeHead
+    public SnakeHead getHead() {
+        return (SnakeHead) body.get(0);
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // incrementSnake() - Moves head to new position. Also sets next segment X, Y to previous segment X, Y
     public void incrementSnake(int headX, int headY) {
 
-        for (int idx = 0; idx < getSnakeBodySize(); idx++) {
-            SnakeElement segment = getSnakeBody().get(idx);
+        for (int idx = 0; idx < getBodySize(); idx++) {
+            SnakeElement segment = getBody().get(idx);
             if (idx == 0) {
                 segment.setPreviousX(segment.getCurrentX());
                 segment.setPreviousY(segment.getCurrentY());
                 segment.setCurrentX(headX);
                 segment.setCurrentY(headY);
             } else {
-                SnakeElement previousSegment = getSnakeBody().get(idx - 1);
+                SnakeElement previousSegment = getBody().get(idx - 1);
                 segment.setPreviousX(segment.getCurrentX());
                 segment.setPreviousY(segment.getCurrentY());
                 segment.setCurrentX(previousSegment.getPreviousX());
@@ -75,12 +82,13 @@ public class Snake {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // addSegment() -  Add segments to snake body
     public void addSegment(int numSegmentsToAdd) {
-        int snakeSize = getSnakeBodySize();
+        int snakeSize = getBodySize();
         if (snakeSize > 0) {
 
             for (int counter = 1; counter <= numSegmentsToAdd; counter++) {
-                SnakeElement lastSegment = getSnakeBody().get(snakeSize - 1);
+                SnakeElement lastSegment = getBody().get(snakeSize - 1);
                 int x = lastSegment.getCurrentX();
                 int y = lastSegment.getCurrentY();
 
@@ -96,19 +104,20 @@ public class Snake {
                 }
 
                 SnakeElement newSegment = new SnakeElement(x, y, Color.GREEN);
-                getSnakeBody().add(newSegment);
+                getBody().add(newSegment);
             }
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // selfIntersection - Returns true if SnakeHead intersects test X, Y coordinates
     public boolean selfIntersection(int x, int y) {
 
         boolean selfIntersection = false;
 
-        for (int idx = 0; idx < getSnakeBodySize(); idx++) {
+        for (int idx = 0; idx < getBodySize(); idx++) {
             if (idx > 0) {
-                SnakeElement SnakeElement = getSnakeBody().get(idx);
+                SnakeElement SnakeElement = getBody().get(idx);
                 if (x == SnakeElement.getCurrentX() && y == SnakeElement.getCurrentY()) {
                     selfIntersection = true;
                 }

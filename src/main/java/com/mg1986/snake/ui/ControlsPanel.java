@@ -1,18 +1,25 @@
 package com.mg1986.snake.ui;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 /**
  * Author: Matthew Gray
- * Last Modified: 3/7/2018
+ * Last Modified: 3/3/2019
  * Copyright (C) 2018 Matthew Gray
- * com.mg1986.Snake.ApplicationPanel class -
+ * com.mg1986.snake.ui.ControlsPanel class
  */
 
 public class ControlsPanel extends BasePanel {
 
+    // Panel Height
+    private static final int menuWidth = 480;
+
+    // Panel Width
+    private static final int menuHeight = 715;
+
     //------------------------------------------------------------------------------------------------------------------
+    // ControlsPanel constructor -
     public ControlsPanel() {
 
         setBackground(Color.BLACK);
@@ -30,10 +37,5 @@ public class ControlsPanel extends BasePanel {
         add(Box.createVerticalStrut(25));
         addJLabel("[Press ENTER to play]", 35);
         setVisible(true);
-
-        revalidate();
-        repaint();
-        sync();
-
     }
 }
